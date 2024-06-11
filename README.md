@@ -17,20 +17,6 @@
 
 <br>
 
-<h3>Usage</h3>
-
-<p>Follow the on-screen prompts to navigate through the menu:</p>
-<ol>
-    <li><b>Create Account:</b> Enter the account number and account holder name.</li><br>
-    <li><b>Deposit:</b>Enter the account number and the amount to deposit.</li><br>
-    <li><b>Withdraw:</b> Enter the account number and the amount to withdraw.</li><br>
-    <li><b>Check Balance:</b> Enter the account number to view the current balance</li><br>
-    <li><b>Display All Accounts:</b> View the details of all accounts.</li><br>
-    <li><b>Exit:</b> Terminate the program.</li><br>
-</ol>
-
-<br>
-
 <h3>Example:</h3>
 <pre>
 Bank Account Management System 
@@ -57,10 +43,5 @@ Account 123456789 has a balance of $1000
 
 <br>
 
-<h3>Acknowledgments</h3>
-<ol>
-    <li>Inspired by basic banking system programs and tutorials.</li>
-</ol>
-<br>
 Feel free to contact me for any questions or suggestions.
 
