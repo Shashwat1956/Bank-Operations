@@ -49,7 +49,7 @@ int main() {
 
     while (true) {
         cout << "\nBank Account Management System" << endl;
-        cout << "1. Create Account\n2. Deposit\n3. Withdraw\n4. Check Balance\n5. Display All Accounts\n6. Exit" << endl;
+        cout << "\n1. Create Account\n2. Deposit\n3. Withdraw\n4. Check Balance\n5. Display All Accounts\n6. Exit" << endl;
         cout << "Enter your choice: ";
         int choice;
         cin >> choice;
