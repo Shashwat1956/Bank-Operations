@@ -20,7 +20,6 @@
 <h3>Example:</h3>
 <pre>
 Bank Account Management System 
-    
 1. Create Account
 2. Deposit
 3. Withdraw
