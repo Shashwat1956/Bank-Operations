@@ -1,6 +1,7 @@
 #include <iostream>
-#include <vector>
+#include <unordered_map>
 #include <string>
+
 using namespace std;
 
 class BankAccount {
@@ -12,10 +13,6 @@ private:
 public:
     BankAccount(const string& accNumber, const string& accHolderName)
         : accountNumber(accNumber), accountHolderName(accHolderName), balance(0.0) {}
-
-    string getAccountNumber() const {
-        return accountNumber;
-    }
 
     void deposit(double amount) {
         if (amount > 0) {
@@ -40,12 +37,74 @@ public:
     }
 
     void displayAccountInfo() const {
-        cout << "Account Number: " << accountNumber << ", Account Holder: " << accountHolderName << ", Balance: $" << balance << endl;
+        cout << "Account Number: " << accountNumber 
+             << ", Account Holder: " << accountHolderName 
+             << ", Balance: $" << balance << endl;
+    }
+};
+
+class Bank {
+private:
+    unordered_map<string, BankAccount> accounts; 
+
+    BankAccount* findAccount(const string& accountNumber) {
+        if (accounts.find(accountNumber) != accounts.end()) {
+            return &accounts[accountNumber];
+        }
+        return nullptr;
+    }
+
+public:
+    void createAccount(const string& accountNumber, const string& accountHolderName) {
+        if (accounts.find(accountNumber) != accounts.end()) {
+            cout << "Account number already exists. Please use a unique account number." << endl;
+        } else {
+            accounts[accountNumber] = BankAccount(accountNumber, accountHolderName);
+            cout << "Account created successfully." << endl;
+        }
+    }
+
+    void deposit(const string& accountNumber, double amount) {
+        BankAccount* account = findAccount(accountNumber);
+        if (account) {
+            account->deposit(amount);
+        } else {
+            cout << "Account number not found." << endl;
+        }
+    }
+
+    void withdraw(const string& accountNumber, double amount) {
+        BankAccount* account = findAccount(accountNumber);
+        if (account) {
+            account->withdraw(amount);
+        } else {
+            cout << "Account number not found." << endl;
+        }
+    }
+
+    void checkBalance(const string& accountNumber) {
+        BankAccount* account = findAccount(accountNumber);
+        if (account) {
+            account->checkBalance();
+        } else {
+            cout << "Account number not found." << endl;
+        }
+    }
+
+    void displayAllAccounts() const {
+        if (accounts.empty()) {
+            cout << "No accounts found." << endl;
+        } else {
+            cout << "Displaying all accounts:" << endl;
+            for (const auto& [accNumber, account] : accounts) {
+                account.displayAccountInfo();
+            }
+        }
     }
 };
 
 int main() {
-    vector<BankAccount> accounts;
+    Bank bank;
 
     while (true) {
         cout << "\nBank Account Management System" << endl;
@@ -54,99 +113,49 @@ int main() {
         int choice;
         cin >> choice;
 
+        string accountNumber, accountHolderName;
+        double amount;
+
         switch (choice) {
-            case 1: {
-                string accountNumber, accountHolderName;
+            case 1: 
                 cout << "Enter account number: ";
                 cin >> accountNumber;
                 cout << "Enter account holder name: ";
-                cin.ignore(); 
+                cin.ignore();
                 getline(cin, accountHolderName);
-
-                bool exists = false;
-                for (const BankAccount& account : accounts) {
-                    if (account.getAccountNumber() == accountNumber) {
-                        exists = true;
-                        break;
-                    }
-                }
-                if (exists) {
-                    cout << "Account number already exists. Please use a unique account number." << endl;
-                } else {
-                    accounts.push_back(BankAccount(accountNumber, accountHolderName));
-                    cout << "Account created successfully." << endl;
-                } 
+                bank.createAccount(accountNumber, accountHolderName);
                 break;
-            }
-            case 2: {
-                string accountNumber;
-                double amount;
+
+            case 2: 
                 cout << "Enter account number: ";
                 cin >> accountNumber;
                 cout << "Enter deposit amount: $";
                 cin >> amount;
-                cin.ignore(); // Clear the input buffer before the next input
-                bool found = false;
-                for (BankAccount& account : accounts) {
-                    if (accountNumber == account.getAccountNumber()) {
-                        account.deposit(amount);
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    cout << "Account number not found." << endl;
-                }
+                bank.deposit(accountNumber, amount);
                 break;
-            }
-            case 3: {
-                string accountNumber;
-                double amount;
+
+            case 3: 
                 cout << "Enter account number: ";
                 cin >> accountNumber;
                 cout << "Enter withdrawal amount: $";
                 cin >> amount;
-                cin.ignore(); // Clear the input buffer before the next input
-                bool found = false;
-                for (BankAccount& account : accounts) {
-                    if (accountNumber == account.getAccountNumber()) {
-                        account.withdraw(amount);
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    cout << "Account number not found." << endl;
-                }
+                bank.withdraw(accountNumber, amount);
                 break;
-            }
-            case 4: {
-                string accountNumber;
+
+            case 4:
                 cout << "Enter account number: ";
                 cin >> accountNumber;
-                bool found = false;
-                for (const BankAccount& account : accounts) {
-                    if (accountNumber == account.getAccountNumber()) {
-                        account.checkBalance();
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    cout << "Account number not found." << endl;
-                }
+                bank.checkBalance(accountNumber);
                 break;
-            }
-            case 5: {
-                cout << "Displaying all accounts:" << endl;
-                for (const BankAccount& account : accounts) {
-                    account.displayAccountInfo();
-                }
+
+            case 5:
+                bank.displayAllAccounts();
                 break;
-            }
-            case 6:
-                cout << "Exiting Program.. \nGoodbye!" << endl;
+
+            case 6: 
+                cout << "Exiting Program... Goodbye!" << endl;
                 return 0;
+
             default:
                 cout << "Invalid choice. Please try again." << endl;
         }
