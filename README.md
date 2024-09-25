@@ -45,29 +45,7 @@ Bank Account Management System
 6. Exit
 ```
 
-Users can enter their choice to perform operations on their bank accounts.
-
-## Usage
-
-1. **Clone the Repository**:
-    ```
-    git clone https://github.com/your-username/bank.git
-    cd bank
-    ```
-
-2. **Compile the Program**:
-    You can use a C++ compiler like `g++` to compile the code:
-    ```
-    g++ bank.cpp -o bank
-    ```
-
-3. **Run the Program**:
-    After compiling, run the executable:
-    ```
-    ./bank
-    ```
-
-4. **Interact with the System**:
+ **Interact with the System**:
     Follow the on-screen instructions to create accounts, deposit/withdraw funds, and check balances.
 
 ## Example Output
@@ -105,10 +83,3 @@ Here are some ideas for future improvements:
 - **Transaction History**: Maintain a record of each account’s transaction history (deposits and withdrawals).
 - **Interest Calculation**: Implement functionality to calculate interest on the balance.
 
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
----
-
-This README should be placed in the root of your repository, named `README.md`. It describes the code's purpose, functionality, and usage, making it easier for anyone reviewing or using your code to understand how to interact with the Bank Account Management System.
