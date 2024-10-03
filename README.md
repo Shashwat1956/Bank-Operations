@@ -10,7 +10,7 @@ This is a simple **Bank Account Management System** implemented in C++. The syst
 - **Deposit**: Users can deposit a specified amount of money into their account.
 - **Withdraw**: Users can withdraw a specified amount from their account, provided sufficient balance is available.
 - **Check Balance**: Users can check the current balance of their account.
-- **Display All Accounts**: The system displays the details of all created 
+- **Display All Accounts**: The system displays the details of all created accounts.
 - **Exit**: Exits the program.
 
 ## How It Works
